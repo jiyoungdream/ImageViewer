@@ -1,0 +1,88 @@
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+.folder-wrapper .folder {
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #f1f0ee;
+	border-style: solid;
+	border-width: 1px;
+	margin: 3px;
+}
+
+.folder-wrapper ul li {
+	float: left;
+}
+
+.folder-wrapper .folder img {
+	margin: 0 auto;
+	width: 72px;
+	height: 72px;
+}
+
+.folder-wrapper .folder .block {
+	width: 72px;
+	height: 72px;
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.folder-wrapper .folder span {
+	margin: 0 auto;
+}
+
+.image-wrapper .image {
+	width: 150px;
+	height: 150px;
+	text-align: center;
+	vertical-align: middle;
+	background-color: #f1f0ee;
+	border-style: solid;
+	border-width: 1px;
+	margin: 3px;
+}
+
+.image-wrapper .image img {
+	width: 150px;
+	height: 150px;
+}
+
+.image-wrapper ul li {
+	float: left;
+}
+
+.image-wrapper .checkbox {
+	position: absolute;
+	margin-left: 5px;
+}
+
+.image-wrapper .checkbox-wrap {
+	position: absolute;
+	margin-left: 5px;
+	margin-top: 5px;
+}
+
+.checkbox-wrap {
+	cursor: pointer;
+}
+
+.image-wrapper .check-icon {
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	background: url(../images/chk.png) left center no-repeat;
+	vertical-align: middle;
+	transition-duration: .3s;
+}
+
+.image-wrapper input[type=checkbox] {
+	display: none;
+}
+
+.image-wrapper input[type=checkbox]:checked+.check-icon {
+	background-image: url(../images/chk_active.png);
+}
