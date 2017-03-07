@@ -125,6 +125,7 @@ ul {
 	width: 150px;
 	height: 150px;
 	image-orientation: from-image;
+	visibility: hidden;
 }
 
 .image-wrapper ul li {

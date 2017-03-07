@@ -67,7 +67,7 @@
 			<ul>
 				<li class="image">
 					<label class="checkbox-wrap"><input type="checkbox" name="chkbox" value="folder.png"><i class="check-icon"></i></label>
-					<a class="example-image-link" href="images/img_20170306092425.jpg" data-lightbox="example-set" ><img class="example-image rotate90" id="img1" src="images/img_20170306092425.jpg"/></a>
+					<a class="example-image-link" href="images/img_20170306092425.jpg" data-lightbox="example-set" ><img class="example-image img1" id="img1" src="images/img_20170306092425.jpg"/></a>
 				</li>	
 				<li class="image">
 					<label class="checkbox-wrap"><input type="checkbox" name="chkbox" value="close.png"><i class="check-icon"></i></label>
@@ -75,7 +75,7 @@
 				</li>
 				<li class="image">
 					<label class="checkbox-wrap"><input type="checkbox" name="chkbox" value="next.png"><i class="check-icon"></i></label>
-					<a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-4.jpg" data-lightbox="example-set" ><img class="example-image" src="images/next.png" alt="" /></a>
+					<a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-4.jpg" data-lightbox="example-set" ><img class="example-image" id="img3" src="images/img_20170306092426.jpg" alt="" /></a>
 				</li>
 				<li class="image">
 					<label class="checkbox-wrap"><input type="checkbox" name="chkbox" value=""><i class="check-icon"></i></label>
@@ -98,6 +98,7 @@
   <script src="./js/jszip.min.js"></script>
   <script src="./js/jquery-3.1.1.min.js"></script>
   <script src="./js/exif.js"></script>
+  <script src="./js/img-rotate.js"></script>
 	<script>
 		// 파라미터 가져오기
 		Url = {
@@ -114,22 +115,26 @@
 		};
 	
 		$(document).ready(function () {
-			
-			setTimeout(function() {
-				var img1 = document.getElementById("img1");
-			    EXIF.getData(img1, function() {
-			    	var orientation = EXIF.getTag(this, "Orientation");
-			    	console.log("orientation1 :: " + orientation);
-			    });
-			    
-				var img2 = document.getElementById("img2");
-			    EXIF.getData(img2, function() {
-			    	var orientation = EXIF.getTag(this, "Orientation");
-			    	console.log("orientation2 :: " + orientation);
-			    });
-			}, 200);
-			
+		
+			/* var img1 = $(".img1")[0];
+			console.log(img1); */
 		    
+		    
+			/* var img2 = document.getElementById("img2");
+		    EXIF.getData(img2, function() {
+		    	var orientation = EXIF.getTag(this, "Orientation");
+		    	console.log("orientation2 :: " + orientation);
+		    }); */
+			    
+		    setTimeout(function() { 
+		    	
+		    	Rotate.rotate($(".img1")); 
+		    	var img2 = document.getElementById("img2");
+		    	Rotate.rotate(img2); 
+		    	
+		    	Rotate.rotate($("#img3")); 
+		    }, 10);
+			
 			$("#title").text(Url.get.folder);
 			$("#allChkBox").attr("checked", true);
 			$("#allChkBox").attr("checked", false);
