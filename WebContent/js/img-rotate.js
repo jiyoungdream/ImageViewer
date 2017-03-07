@@ -19,9 +19,6 @@
         root.Rotate = Rotate;
     }
     
-    /**
-     * jQuery Obj
-     */
 	Rotate.rotate = function (img) {
 		// EXIF 
 		// image Orientation Explain 
@@ -49,10 +46,13 @@
 	    	if(debug) console.log("img orientation :: " + orientation); 
 	    	changeRotate(orientation, img);
 	    });
+		
+//		var OverlayView  = '<div class="imgRotateOverlay"></div>'
+//		document.body.innerHTML += OverlayView;
+		
 	}
 	
-	
-function changeRotate(orientation, img){
+	function changeRotate(orientation, img){
 		
 		var rotate = 0;
 		var scale = 1;
@@ -103,7 +103,6 @@ function changeRotate(orientation, img){
 			img.setAttribute("style", "transform: rotate(" + rotate + "deg)");
 //			img.setAttribute("style", "visibility:visible");
 		}
-		
 	}
 
 }.call(this));

@@ -23,6 +23,7 @@
 <link href="./css/jumbotron-narrow.css" rel="stylesheet">
 
 <link href="./css/main.css" rel="stylesheet">
+<link href="./css/img-rotate.css" rel="stylesheet">
 <link rel="stylesheet" href="./css/lightbox.css">
 
 <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
@@ -75,7 +76,7 @@
 				</li>
 				<li class="image">
 					<label class="checkbox-wrap"><input type="checkbox" name="chkbox" value="next.png"><i class="check-icon"></i></label>
-					<a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-4.jpg" data-lightbox="example-set" ><img class="example-image" id="img3" src="images/img_20170306092426.jpg" alt="" /></a>
+					<a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-4.jpg" data-lightbox="example-set" ><img class="example-image" id="img3" src="" alt="" /></a>
 				</li>
 				<li class="image">
 					<label class="checkbox-wrap"><input type="checkbox" name="chkbox" value=""><i class="check-icon"></i></label>
@@ -87,8 +88,32 @@
 				</li>
 			</ul>
 	    </div>
+	    
+	    <div class="image-wrapper">
+			<ul>
+				<li class="image">
+					<img class="example-image img1" id="img1" src="images/img_20170306092425.jpg"/>
+				</li>	
+				<li class="image">
+					<img class="example-image"  id="img2" src="images/img_20170306092503.jpg" alt=""/>
+				</li>
+				<li class="image">
+					<img class="example-image" id="img3" src="" alt="" />
+				</li>
+				<li class="image">
+					<img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-5.jpg" alt="" />
+				</li>
+				<li class="image">	
+					<img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-6.jpg" alt="" />
+				</li>
+			</ul>
+	    </div>
 	</div>
 	
+	<div class="imgRotateOverlay">
+	</div>
+	<!-- <img class="centerImage" src="images/img_20170306092503.jpg" onload="javascript:fitImageSize(this, 'images/img_20170306092503.jpg', window.innerWidth, window.innerHeight);"/>  -->
+	<img class="centerImage" id="centerImage" src="images/img_20170306092503.jpg"/> -->
 	<form method="POST" action="download.zip" name="download">
 		<input type="hidden" name="images" value="">
 	</form>
@@ -125,7 +150,13 @@
 		    	var orientation = EXIF.getTag(this, "Orientation");
 		    	console.log("orientation2 :: " + orientation);
 		    }); */
+		    
+		   /* getImageSize($(".centerImage")[0]); */
 			    
+		  /*  fitImageSize(document.getElementById("centerImage"), "images/img_20170306092503.jpg", window.innerWidth , window.innerHeight); */
+		   
+		   fitImageSize($(".centerImage")[0], "images/img_20170306092503.jpg", window.innerWidth , window.innerHeight);
+		   
 		    setTimeout(function() { 
 		    	
 		    	Rotate.rotate($(".img1")); 
@@ -191,7 +222,31 @@
 	      'alwaysShowNavOnTouchDevices' : true,
 			'resizeDuration' : 200,
 			'wrapAround' : true
-		})
+		});
+	    
+	    function fitImageSize(obj, href, maxWidth, maxHeight) {
+	    	var image = new Image();
+
+	    	image.onload = function(){
+	    	
+	    		var width = image.width;
+	    		var height = image.height;
+	    		
+	    		var scalex = maxWidth / width;
+	    		var scaley = maxHeight / height;
+	    		
+	    		var scale = (scalex < scaley) ? scalex : scaley;
+	    		if (scale > 1) 
+	    			scale = 1;
+	    		
+	    		obj.width = scale * width - 20;
+	    		obj.height = scale * height - 20;
+	    		obj.style.top = "20px";
+	    		
+	    		obj.style.display = "";
+	    	}
+	    	image.src = href;
+	    }
 	</script>
 </body>
 </html>
