@@ -89,7 +89,7 @@
     	    	
     	    	//indicator reset position
     	    	var indicatorLeft = document.getElementById("indicator-left");
-    	    	indicatorLeft.style.top = "200px";
+    	    	indicatorLeft.style.top = (wrapper.offsetHeight / 2 ) - (indicatorLeft.offsetHeight /2) + "px";
     	    	
     	    	centerImage.attr("width", scaleWidth);
         		centerImage.attr("height", scaleHeight);
