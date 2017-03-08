@@ -37,19 +37,80 @@
 		// jQuery Obj
 		var imgObj = img;
 		if (img instanceof  jQuery) {
-			if(debug) console.log("jQuery obj :: true"); 
 			imgObj = imgObj[0];
 		}
 		
 		EXIF.getData(imgObj, function() {
 	    	var orientation = EXIF.getTag(this, "Orientation");
-	    	if(debug) console.log("img orientation :: " + orientation); 
 	    	changeRotate(orientation, img);
 	    });
-		
-//		var OverlayView  = '<div class="imgRotateOverlay"></div>'
-//		document.body.innerHTML += OverlayView;
-		
+	}
+	
+	Rotate.click = function(obj) {
+		var image = new Image();
+
+    	image.onload = function(){
+    	
+    		var width = image.width;
+    		var height = image.height;
+    		
+    		var scalex = window.innerWidth / width;
+    		var scaley = window.innerHeight / height;
+    		
+    		var scale = (scalex < scaley) ? scalex : scaley;
+    		if (scale > 1) 
+    			scale = 1;
+    		
+    		
+    		var centerImage = $("#centerImage");
+    		centerImage.attr("src", obj.src);
+    		
+    		Rotate.rotate(centerImage);
+    		
+    		EXIF.getData(obj, function() {
+    	    	var orientation = EXIF.getTag(this, "Orientation");
+//    	    	if (orientation == 6 || orientation == 8) {
+//            		centerImage.attr("width", scale * height- 20);
+//            		centerImage.attr("height", scale * width  - 40);
+//    	    	} 
+//    	    	else {
+//    	    		centerImage.attr("width", scale * width - 20);
+//            		centerImage.attr("height", scale * height - 40);
+//    	    	}
+    	    	
+    	    	
+    	    	var scaleWidth = scale * width - 20;
+    	    	var scaleHeight = scale * height - 40;
+    	    	
+    	    	// wrapper resize
+    	    	var wrapper = document.getElementById("center-image-wrapper");
+    	    	wrapper.style.width = scaleWidth +"px";
+    	    	wrapper.style.height = scaleHeight + "px";
+    	    	
+    	    	//indicator reset position
+    	    	var indicatorLeft = document.getElementById("indicator-left");
+    	    	indicatorLeft.style.top = "200px";
+    	    	
+    	    	centerImage.attr("width", scaleWidth);
+        		centerImage.attr("height", scaleHeight);
+        		
+        		
+    	    	if(debug) console.log("width :: " + centerImage.attr("width")); 
+    	    	if(debug) console.log("height :: " + centerImage.attr("height")); 
+        		
+        		// 따로 구현해야 함
+        		centerImage.css("top", "100px");
+        		centerImage.css("left", "20px");
+    	    });
+    		
+    	}
+    	
+    	var OverlayView = document.getElementById("imgRotateOverlay");
+    	OverlayView.setAttribute("style", "display:block");
+    	
+    	image.src = obj.src;
+    	var img = document.getElementById("centerImage");
+    	img = image;
 	}
 	
 	function changeRotate(orientation, img){
@@ -86,14 +147,18 @@
 				rotate = 270;
 			break;
 		}
-		
+		applyCSS(img, rotate);
+	}
+	
+	function applyCSS(img, rotate) {
 		if (img instanceof  jQuery) {
 			img.css("-webkit-transform", "rotate(" + rotate + "deg)");
 			img.css("-moz-transform", "rotate(" + rotate + "deg)");
 			img.css("-o-transform", "rotate(" + rotate + "deg)");
 			img.css("-ms-transform", "rotate(" + rotate + "deg)");
 			img.css("transform", "rotate(" + rotate + "deg)");
-//			img.css("visibility", "visible");
+			img.css("visibility", "visible");
+			img.css("display", "block");
 		}
 		else {
 			img.setAttribute("style", "-webkit-transform:rotate(" + rotate + "deg)");
@@ -101,7 +166,23 @@
 			img.setAttribute("style", "-o-transform: rotate(" + rotate + "deg)");
 			img.setAttribute("style", "-ms-transform: rotate(" + rotate + "deg)");
 			img.setAttribute("style", "transform: rotate(" + rotate + "deg)");
-//			img.setAttribute("style", "visibility:visible");
+			img.setAttribute("style", "visibility:visible");
+			img.setAttribute("style", "display:block");
+		}
+	}
+	
+
+	window.document.onkeydown = function(e) {
+		if (!e)
+			e = event;
+		
+		// ESC key down
+		if (e.keyCode == 27) {
+			var OverlayView = document.getElementById("imgRotateOverlay");
+			OverlayView.setAttribute("style", "display:none");
+			
+			var centerImage = document.getElementById("centerImage");
+			centerImage.setAttribute("style", "display:none");
 		}
 	}
 
