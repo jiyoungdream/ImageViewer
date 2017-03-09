@@ -141,16 +141,6 @@
 		
 	}
 	
-	function getNodeIndex(node) {
-	    var index = 0;
-	    while ( (node = node.previousSibling) ) {
-	        if (node.nodeType != 3 || !/^\s*$/.test(node.data)) {
-	            index++;
-	        }
-	    }
-	    return index;
-	}
-	
 	function changeRotate(orientation, img){
 		
 		var rotate = 0;

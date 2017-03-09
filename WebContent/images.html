@@ -204,29 +204,6 @@
 			downloadForm.submit();
 		});
 	
-	    function fitImageSize(obj) {
-	    	var image = new Image();
-
-	    	image.onload = function(){
-	    	
-	    		var width = image.width;
-	    		var height = image.height;
-	    		
-	    		var scalex = window.innerWidth / width;
-	    		var scaley = window.innerHeight / height;
-	    		
-	    		var scale = (scalex < scaley) ? scalex : scaley;
-	    		if (scale > 1) 
-	    			scale = 1;
-	    		
-	    		obj.width = scale * width - 20;
-	    		obj.height = scale * height - 40;
-	    		obj.style.top = "20px";
-	    		
-	    		obj.style.display = "block";
-	    	}
-	    	image.src = obj.src;
-	    }
 	</script>
 </body>
 </html>
