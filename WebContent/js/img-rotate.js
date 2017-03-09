@@ -40,18 +40,18 @@
 		var imgObj = img;
 		if (img instanceof  jQuery) {
 			imgObj = imgObj[0];
+			
+			// Catch the index when DOM is clicked
+			img.off("click").on("click", function() {
+				index = $(".rotate-image").index(this);
+				Rotate.click(this);
+			});
 		}
 		
 		EXIF.getData(imgObj, function() {
 	    	var orientation = EXIF.getTag(this, "Orientation");
 	    	changeRotate(orientation, img);
 	    });
-		
-		// Catch the index when DOM is clicked
-		img.off("click").on("click", function() {
-			index = $(".rotate-image").index(this);
-			Rotate.click(this);
-		});
 	}
 	
 	Rotate.click = function(obj) {
@@ -93,10 +93,6 @@
     	    	wrapper.style.width = scaleWidth +"px";
     	    	wrapper.style.height = scaleHeight + "px";
     	    	
-    	    	//indicator reset position
-    	    	var indicatorLeft = document.getElementById("indicator-left");
-    	    	indicatorLeft.style.top = (wrapper.offsetHeight / 2 ) - (indicatorLeft.offsetHeight /2) + "px";
-    	    	
     	    	centerImage.attr("width", scaleWidth);
         		centerImage.attr("height", scaleHeight);
         		
@@ -127,7 +123,6 @@
 			Rotate.click($(".rotate-image").get(++index));
 		}
 	}
-	
 	
 	Rotate.clickLeft = function() {
 		if (debug) console.log("click left");

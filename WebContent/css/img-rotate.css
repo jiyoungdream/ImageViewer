@@ -20,12 +20,16 @@
 }
 
 .indicator {
+	position: absolute;
 	font-size: 30px;
 	cursor: pointer;
+	top:50%;
 }
 
 .indicator-left {
+	left : 10px;
 }
 
 .indicator-right {
+	right:10px;
 }
