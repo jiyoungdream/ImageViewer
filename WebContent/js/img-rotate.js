@@ -19,6 +19,8 @@
         root.Rotate = Rotate;
     }
     
+    var index = 0;
+    
 	Rotate.rotate = function (img) {
 		// EXIF 
 		// image Orientation Explain 
@@ -44,11 +46,16 @@
 	    	var orientation = EXIF.getTag(this, "Orientation");
 	    	changeRotate(orientation, img);
 	    });
+		
+		// Catch the index when DOM is clicked
+		img.off("click").on("click", function() {
+			index = $(".rotate-image").index(this);
+		});
 	}
 	
 	Rotate.click = function(obj) {
 		var image = new Image();
-
+		
     	image.onload = function(){
     	
     		var width = image.width;
@@ -65,10 +72,9 @@
     		var centerImage = $("#centerImage");
     		centerImage.attr("src", obj.src);
     		
-    		Rotate.rotate(centerImage);
-    		
     		EXIF.getData(obj, function() {
     	    	var orientation = EXIF.getTag(this, "Orientation");
+    	    	changeRotate(orientation, centerImage);
 //    	    	if (orientation == 6 || orientation == 8) {
 //            		centerImage.attr("width", scale * height- 20);
 //            		centerImage.attr("height", scale * width  - 40);
@@ -77,7 +83,6 @@
 //    	    		centerImage.attr("width", scale * width - 20);
 //            		centerImage.attr("height", scale * height - 40);
 //    	    	}
-    	    	
     	    	
     	    	var scaleWidth = scale * width - 20;
     	    	var scaleHeight = scale * height - 40;
@@ -94,15 +99,13 @@
     	    	centerImage.attr("width", scaleWidth);
         		centerImage.attr("height", scaleHeight);
         		
-        		
-    	    	if(debug) console.log("width :: " + centerImage.attr("width")); 
-    	    	if(debug) console.log("height :: " + centerImage.attr("height")); 
+//    	    	if(debug) console.log("width :: " + centerImage.attr("width")); 
+//    	    	if(debug) console.log("height :: " + centerImage.attr("height")); 
         		
         		// 따로 구현해야 함
         		centerImage.css("top", "100px");
         		centerImage.css("left", "20px");
     	    });
-    		
     	}
     	
     	var OverlayView = document.getElementById("imgRotateOverlay");
@@ -111,6 +114,40 @@
     	image.src = obj.src;
     	var img = document.getElementById("centerImage");
     	img = image;
+	}
+	
+	Rotate.clickRight = function() {
+		if (debug) console.log("click right");
+		if (index == $(".rotate-image").length - 1) {
+			index = 0;
+			Rotate.click($(".rotate-image").get(index));
+		}
+		else {
+			Rotate.click($(".rotate-image").get(++index));
+		}
+	}
+	
+	
+	Rotate.clickLeft = function() {
+		if (debug) console.log("click left");
+		if (index == 0) {
+			index = $(".rotate-image").length - 1;
+			Rotate.click($(".rotate-image").get(index));
+		}
+		else {
+			Rotate.click($(".rotate-image").get(--index));
+		}
+		
+	}
+	
+	function getNodeIndex(node) {
+	    var index = 0;
+	    while ( (node = node.previousSibling) ) {
+	        if (node.nodeType != 3 || !/^\s*$/.test(node.data)) {
+	            index++;
+	        }
+	    }
+	    return index;
 	}
 	
 	function changeRotate(orientation, img){
@@ -167,7 +204,6 @@
 			img.setAttribute("style", "-ms-transform: rotate(" + rotate + "deg)");
 			img.setAttribute("style", "transform: rotate(" + rotate + "deg)");
 			img.setAttribute("style", "visibility:visible");
-			img.setAttribute("style", "display:block");
 		}
 	}
 	

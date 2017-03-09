@@ -19,6 +19,13 @@
     display: none;
 }
 
+.indicator {
+	font-size: 30px;
+	cursor: pointer;
+}
+
 .indicator-left {
-	position: relative;
+}
+
+.indicator-right {
 }

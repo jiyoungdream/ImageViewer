@@ -34,7 +34,7 @@
 <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <![endif]-->	
 </head>
 <body>
 
@@ -64,7 +64,7 @@
 		<!-- image Orientation Explain  -->
 		<!-- http://sylvana.net/jpegcrop/exif_orientation.html   -->
 		<!-- **************************************** -->
-		<div class="image-wrapper">
+		<!-- <div class="image-wrapper">
 			<ul>
 				<li class="image">
 					<label class="checkbox-wrap"><input type="checkbox" name="chkbox" value="folder.png"><i class="check-icon"></i></label>
@@ -86,15 +86,15 @@
 					<a class="example-image-link" href="http://lokeshdhakar.com/projects/lightbox2/images/image-6.jpg" data-lightbox="example-set" ><img class="example-image" src="http://lokeshdhakar.com/projects/lightbox2/images/thumb-6.jpg" alt="" /></a>
 				</li>
 			</ul>
-	    </div>
+	    </div> -->
 	    
 	    <div class="image-wrapper">
 			<ul>
 				<li class="image">
-					<a href="javascript:"><img class="example-image img1" id="img1" src="images/img_20170306092425.jpg" onclick="Rotate.click(this)"/></a>
+					<a href="javascript:"><img class="rotate-image img1" id="img1" src="images/img_20170306092425.jpg" onclick="Rotate.click(this)"/></a>
 				</li>	
 				<li class="image">
-					<a href="javascript:"><img class="example-image" id="img2" src="images/img_20170306092503.jpg" onclick="Rotate.click(this)"/></a>
+					<a href="javascript:"><img class="rotate-image" id="img2" src="images/img_20170306092503.jpg" onclick="Rotate.click(this)"/></a>
 				</li>
 				<li class="image">
 					<img class="example-image" id="img3" src="" alt="" />
@@ -113,8 +113,8 @@
 	</div>
 	<div class="center-image-wrapper" id="center-image-wrapper">
 		<img class="centerImage" id="centerImage"/>
-		<span class="glyphicon glyphicon-chevron-left indicator-left" id="indicator-left" aria-hidden="true"></span>
-		<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+		<span class="glyphicon glyphicon-chevron-left indicator indicator-left" id="indicator-left" aria-hidden="true" onclick="Rotate.clickLeft()"></span>
+		<span class="glyphicon glyphicon-chevron-right indicator indicator-right" aria-hidden="true" onclick="Rotate.clickRight()"></span>
 	</div>
 	
 
@@ -147,11 +147,9 @@
 		    
 		   setTimeout(function() { 
 		    	
-		    	Rotate.rotate($(".img1")); 
-		    	var img2 = document.getElementById("img2");
-		    	Rotate.rotate(img2); 
+		    	Rotate.rotate($("#img1")); 
+		    	Rotate.rotate($("#img2")); 
 		    	
-		    	Rotate.rotate($("#img3")); 
 		    }, 100);
 			
 			$("#title").text(Url.get.folder);
