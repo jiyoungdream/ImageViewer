@@ -50,6 +50,7 @@
 		// Catch the index when DOM is clicked
 		img.off("click").on("click", function() {
 			index = $(".rotate-image").index(this);
+			Rotate.click(this);
 		});
 	}
 	
