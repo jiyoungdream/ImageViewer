@@ -85,6 +85,8 @@
 //            		centerImage.attr("height", scale * height - 40);
 //    	    	}
     	    	
+    	    	// 돌린 후에 Center위치를 재조정해야함
+    	    	
     	    	var scaleWidth = scale * width - 20;
     	    	var scaleHeight = scale * height - 40;
     	    	
