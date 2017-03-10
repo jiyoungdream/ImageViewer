@@ -96,9 +96,6 @@
     	    	centerImage.attr("width", scaleWidth);
         		centerImage.attr("height", scaleHeight);
         		
-//    	    	if(debug) console.log("width :: " + centerImage.attr("width")); 
-//    	    	if(debug) console.log("height :: " + centerImage.attr("height")); 
-        		
         		// 따로 구현해야 함
         		centerImage.css("top", "100px");
         		centerImage.css("left", "20px");
@@ -114,7 +111,6 @@
 	}
 	
 	Rotate.clickRight = function() {
-		if (debug) console.log("click right");
 		if (index == $(".rotate-image").length - 1) {
 			index = 0;
 			Rotate.click($(".rotate-image").get(index));
@@ -125,7 +121,6 @@
 	}
 	
 	Rotate.clickLeft = function() {
-		if (debug) console.log("click left");
 		if (index == 0) {
 			index = $(".rotate-image").length - 1;
 			Rotate.click($(".rotate-image").get(index));
@@ -133,7 +128,10 @@
 		else {
 			Rotate.click($(".rotate-image").get(--index));
 		}
-		
+	}
+	
+	Rotate.hide = function() {
+		overlayHide();
 	}
 	
 	function changeRotate(orientation, img){
@@ -193,6 +191,13 @@
 		}
 	}
 	
+	function overlayHide() {
+		var OverlayView = document.getElementById("imgRotateOverlay");
+		OverlayView.setAttribute("style", "display:none");
+		
+		var centerImage = document.getElementById("centerImage");
+		centerImage.setAttribute("style", "display:none");
+	}
 
 	window.document.onkeydown = function(e) {
 		if (!e)
@@ -200,11 +205,7 @@
 		
 		// ESC key down
 		if (e.keyCode == 27) {
-			var OverlayView = document.getElementById("imgRotateOverlay");
-			OverlayView.setAttribute("style", "display:none");
-			
-			var centerImage = document.getElementById("centerImage");
-			centerImage.setAttribute("style", "display:none");
+			overlayHide();
 		}
 	}
 

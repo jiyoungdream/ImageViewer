@@ -23,13 +23,19 @@
 	position: absolute;
 	font-size: 30px;
 	cursor: pointer;
-	top:50%;
+}
+
+.indicator-remove {
+	right : 10px;
+	top: 10px;
 }
 
 .indicator-left {
+	top:50%;
 	left : 10px;
 }
 
 .indicator-right {
+	top:50%;
 	right:10px;
 }
