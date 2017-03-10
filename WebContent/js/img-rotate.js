@@ -76,31 +76,43 @@
     		EXIF.getData(obj, function() {
     	    	var orientation = EXIF.getTag(this, "Orientation");
     	    	changeRotate(orientation, centerImage);
+    	    	
+    	    	var scaleWidth;
+    	    	var scaleHeight;
+    	    	
+    	    	scaleWidth = scale * width * 0.85;
+	    		scaleHeight = scale * height * 0.85;
+    	    	
 //    	    	if (orientation == 6 || orientation == 8) {
-//            		centerImage.attr("width", scale * height- 20);
-//            		centerImage.attr("height", scale * width  - 40);
-//    	    	} 
+//    	    		
+//    	    	}
 //    	    	else {
-//    	    		centerImage.attr("width", scale * width - 20);
-//            		centerImage.attr("height", scale * height - 40);
+//    	    		scaleWidth = scale * width * 0.85;
+//    	    		scaleHeight = scale * height * 0.85;
 //    	    	}
     	    	
-    	    	// 돌린 후에 Center위치를 재조정해야함
-    	    	
-    	    	var scaleWidth = scale * width - 20;
-    	    	var scaleHeight = scale * height - 40;
     	    	
     	    	// wrapper resize
     	    	var wrapper = document.getElementById("center-image-wrapper");
-    	    	wrapper.style.width = scaleWidth +"px";
-    	    	wrapper.style.height = scaleHeight + "px";
+    	    	if (orientation == 6 || orientation == 8) {
+    	    		wrapper.style.width = scaleHeight +"px";
+        	    	wrapper.style.height = scaleWidth + "px";
+    	    	} 
+    	    	else {
+            		wrapper.style.width = scaleWidth +"px";
+        	    	wrapper.style.height = scaleHeight + "px";
+    	    	}
     	    	
     	    	centerImage.attr("width", scaleWidth);
         		centerImage.attr("height", scaleHeight);
         		
-        		// 따로 구현해야 함
-        		centerImage.css("top", "100px");
-        		centerImage.css("left", "20px");
+        		if (debug) console.log(window.innerWidth + " " + scaleWidth);
+        		if (debug) console.log(window.innerWidth/2 - scaleWidth/2 + "px");
+    	    	
+    	    	// 돌린 후에 Center위치를 재조정해야함
+    	    	wrapper.style.top = window.innerHeight/2 - scaleHeight/2 + "px";
+    	    	wrapper.style.left = window.innerWidth/2 - scaleWidth/2 + "px";
+    	    	
     	    });
     	}
     	
@@ -197,7 +209,7 @@
 		var OverlayView = document.getElementById("imgRotateOverlay");
 		OverlayView.setAttribute("style", "display:none");
 		
-		var centerImage = document.getElementById("centerImage");
+		var centerImage = document.getElementById("center-image-wrapper");
 		centerImage.setAttribute("style", "display:none");
 	}
 
