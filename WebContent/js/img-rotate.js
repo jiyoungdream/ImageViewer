@@ -43,7 +43,9 @@
 			
 			// Catch the index when DOM is clicked
 			img.off("click").on("click", function() {
+				if (debug) console.log("click");
 				index = $(".rotate-image").index(this);
+				if (debug) console.log(this);
 				Rotate.click(this);
 			});
 		}
@@ -106,9 +108,6 @@
     	    	centerImage.attr("width", scaleWidth);
         		centerImage.attr("height", scaleHeight);
         		
-        		if (debug) console.log(window.innerWidth + " " + scaleWidth);
-        		if (debug) console.log(window.innerWidth/2 - scaleWidth/2 + "px");
-    	    	
     	    	// 돌린 후에 Center위치를 재조정해야함
     	    	wrapper.style.top = window.innerHeight/2 - scaleHeight/2 + "px";
     	    	wrapper.style.left = window.innerWidth/2 - scaleWidth/2 + "px";
@@ -202,6 +201,7 @@
 			img.setAttribute("style", "-ms-transform: rotate(" + rotate + "deg)");
 			img.setAttribute("style", "transform: rotate(" + rotate + "deg)");
 			img.setAttribute("style", "visibility:visible");
+			img.setAttribute("style", "display:block");
 		}
 	}
 	
@@ -209,7 +209,7 @@
 		var OverlayView = document.getElementById("imgRotateOverlay");
 		OverlayView.setAttribute("style", "display:none");
 		
-		var centerImage = document.getElementById("center-image-wrapper");
+		var centerImage = document.getElementById("centerImage");
 		centerImage.setAttribute("style", "display:none");
 	}
 
