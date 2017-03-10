@@ -26,6 +26,7 @@
 	position: absolute;
 	font-size: 30px;
 	cursor: pointer;
+	z-index: 999;
 }
 
 .indicator-remove {
@@ -41,4 +42,5 @@
 .indicator-right {
 	top:50%;
 	right:10px;
+	
 }
