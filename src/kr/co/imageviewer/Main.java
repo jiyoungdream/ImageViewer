@@ -13,5 +13,6 @@ public class Main {
 		
 		ZipUtility.unzip("/Users/nari/Desktop", "images.zip");
 		System.out.println("unzip end");
+		System.out.println("end");
 	}
 }
